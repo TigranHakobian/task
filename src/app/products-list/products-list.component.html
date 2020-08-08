@@ -1,0 +1,5 @@
+<section>
+  <div *ngFor="let myProduct of products" [class.active]='isSelected(myProduct)'>
+    <app-product-row [product]='myProduct' (selectedProduct)='getSelectedProduct($event)'></app-product-row>
+  </div>
+</section>
