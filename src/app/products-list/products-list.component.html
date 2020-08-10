@@ -1,5 +1,34 @@
 <section>
-  <div *ngFor="let myProduct of products" [class.active]='isSelected(myProduct)'>
+  <form class="form-inline my-2 my-lg-0">  
+    <input 
+    class="form-control mr-sm-2"
+     type="search" placeholder="Search" 
+     aria-label="Search"
+      [(ngModel)]="searchText"
+      (ngModelChange)="searchresalt($event)"
+       [ngModelOptions]="{standalone:true}"
+       >
+     
+    <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button> -->
+    <label for="exampleFormControlSelect1" [style.margin-left.px]="'140'"[style.margin-right.px]="'14'">Example select</label>
+    <select name="cars"
+     id="cars"
+    [(ngModel)]="sorts"
+    (ngModelChange)="toSort($event)"
+     [ngModelOptions]="{standalone:true}"
+     class="form-control" id="exampleFormControlSelect1">
+      <option value="cheap"> cheap to Expensive</option>
+      <option value="expensive">Expensive to cheap</option>
+      <option value="start">A-Z</option>
+      <option value="finsh">Z-A</option>
+    </select>
+  </form>
+  <div *ngFor="let myProduct of products" [class.active]='isSelected(myProduct)' [ngStyle]="{'background-color': 'rgb(248,249,250)',
+  'margin-top': '20px',
+  'font-weight': 'bold'}">
     <app-product-row [product]='myProduct' (selectedProduct)='getSelectedProduct($event)'></app-product-row>
   </div>
+
 </section>
+
+<!-- {{searchText}} -->
