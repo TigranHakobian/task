@@ -1,34 +1,127 @@
-<section>
-  <form class="form-inline my-2 my-lg-0">  
-    <input 
-    class="form-control mr-sm-2"
-     type="search" placeholder="Search" 
-     aria-label="Search"
-      [(ngModel)]="searchText"
-      (ngModelChange)="searchresalt($event)"
-       [ngModelOptions]="{standalone:true}"
-       >
-     
-    <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button> -->
-    <label for="exampleFormControlSelect1" [style.margin-left.px]="'140'"[style.margin-right.px]="'14'">Example select</label>
-    <select name="cars"
-     id="cars"
-    [(ngModel)]="sorts"
-    (ngModelChange)="toSort($event)"
-     [ngModelOptions]="{standalone:true}"
-     class="form-control" id="exampleFormControlSelect1">
-      <option value="cheap"> cheap to Expensive</option>
-      <option value="expensive">Expensive to cheap</option>
-      <option value="start">A-Z</option>
-      <option value="finsh">Z-A</option>
-    </select>
-  </form>
-  <div *ngFor="let myProduct of products" [class.active]='isSelected(myProduct)' [ngStyle]="{'background-color': 'rgb(248,249,250)',
-  'margin-top': '20px',
-  'font-weight': 'bold'}">
-    <app-product-row [product]='myProduct' (selectedProduct)='getSelectedProduct($event)'></app-product-row>
+<section class="d-flex justify-content-between">
+  <div style="max-width: 640px;">
+    <div class="custom-file">
+      <label class="custom-file-label" for="customFile">Search photo</label>
+      <input
+        type="file"
+        [(ngModel)]="currentInput"
+        (change)="onFileSelected($event)"
+        class="custom-file-input"
+        id="customFile"
+      />
+    </div>
+
+    <form class="form-inline my-2 my-lg-0">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        name = "Search"
+        #search = "ngModel"
+        required
+        [(ngModel)]="searchText"
+        (ngModelChange)="searchresalt($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+
+      <p  class="text-danger" [hidden] = "search.valid || !search.untouched"> you should write a words</p>
+
+      <p  class="text-danger" [hidden] = "search.valid || !search.untouched">This filde is nor required</p>
+
+      <label
+        for="exampleFormControlSelect1"
+        [style.margin-left.px]="'140'"
+        [style.margin-right.px]="'14'"
+        >Example select</label
+      >
+
+      <select
+        [(ngModel)]="sorts"
+        (ngModelChange)="toSort($event)"
+        [ngModelOptions]="{ standalone: true }"
+        class="form-control"
+        id="exampleFormControlSelect1"
+      >
+        <option value="expensive">Expensive to cheap</option>
+        <option value="cheap"> cheap to Expensive</option>
+        <option value="start">A-Z</option>
+        <option value="finsh">Z-A</option>
+      </select>
+    </form>
+
+    <div *ngIf="isLoading; else productList">
+      <app-loader></app-loader>
+    </div>
+
+    <ng-template #productList>
+      <div
+        *ngFor="let myProduct of products"
+        appBorderedBox
+        [class.active]="isSelected(myProduct)"
+        [ngStyle]="{
+          'background-color': 'rgb(248,249,250)',
+          'margin-top': '20px',
+          'font-weight': 'bold'
+        }"
+      >
+        <app-product-row
+          [product]="myProduct"
+          (selectedProduct)="getSelectedProduct($event)"
+          (productForEdit)="getProductForEdit($event)"
+        ></app-product-row>
+      </div>
+    </ng-template>
   </div>
 
-</section>
+  <div [formGroup]='editForm' id="edit" *ngIf="!isObjectEmpty(editableProduct)">
+    <div class="card mb-3 center" style="max-width: 640px;" class="maln">
+      <div class="row no-gutters">
+        <div class="col-xs-12">
+          <div class="card-body">
+            <h5 class="card-title">Update the item</h5>
 
-<!-- {{searchText}} -->
+            <p class="card-text">
+              <label for="title">Title</label>
+              <input type="text" id="title" formControlName="editTitle" /> <br>
+              <span class="text-danger" [hidden]="editForm.controls['editTitle'].untouched ||  !editForm.controls['editTitle'].errors?.required">
+                field is required
+              </span>
+            </p>
+            <div>
+              Description:
+              <textarea
+                class="form-control"
+                id="description"
+                formControlName="editDescription"
+              ></textarea>
+              <div class="text-danger" [hidden]="editForm.controls['editDescription'].untouched || !editForm.controls['editDescription'].errors?.required">
+                 field is required
+              </div>
+              <div class="text-danger"  [hidden]="!editForm.get('editDescription').hasError('minlength')">
+                field should be more then 10
+              </div>
+              <div class="text-danger"  [hidden]="!editForm.get('editDescription').hasError('maxlength')">
+                field should  be less then 100
+              </div>
+            </div>
+            <!--  min(min: number) -->
+            <p class="card-text">
+              <label for="price">Price</label>
+              <input type="number"   appBlockCopyPaste id="price" formControlName="editPrice" /> <br>
+              <span class="text-danger" [hidden]="editForm.controls['editPrice'].untouched ||  !editForm.controls['editPrice'].errors?.required">
+                field is required
+              </span>
+              <span class="text-danger" [hidden]="!editForm.get('editPrice').hasError('pattern')">
+                you should write a numbers
+              </span>
+            </p>
+          </div>
+          <div class="col-xs-12">
+            <button [disabled]="editForm.invalid" type="button" (click)="saveValues(editableProduct.id)" class="btn btn-primary">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
