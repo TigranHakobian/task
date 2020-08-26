@@ -1,0 +1,39 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="https://icon-library.com/images/icon-human/icon-human-13.jpg" style="width: 30px;">
+
+    <!-- Login Form -->
+    <div  role="form" [formGroup]="loginForm">
+      <input type="text" id="login" class="fadeIn second" formControlName="email" placeholder="email">
+      <div *ngIf="wrongLogin">
+        <span class="text-danger">
+            You have a wrong login
+        </span>
+      </div>
+      <input type="password" id="password" class="fadeIn third"  formControlName="password" placeholder="password" ng-style="wrongPassword && {'border':'red solid 2px'}">
+      <div *ngIf="wrongPassword">
+        <span class="text-danger">
+           you have a wrong Password
+        </span>
+      </div>
+      <div></div>
+
+      <input type="button" (click)="LoginUsers()" class="fadeIn fourth" value="Log In">
+    </div>
+
+    <!-- Remind Passowrd fotgetPassword-->
+    <div id="formFooter">
+      <a class="underlineHover" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/fotgetPassword">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>

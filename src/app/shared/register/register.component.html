@@ -1,0 +1,97 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container" >
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Please sign up<small>It's free!</small></h3>
+			 			</div>
+			 			<div class="panel-body">
+			    		<form role="form" [formGroup]="registerForm" >
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+							<input type="text" formControlName="first_name" id="first_name" class="form-control input-sm" placeholder="First Name" >
+							<p
+							class="text-danger"
+							[hidden]="registerForm.controls['first_name'].untouched 
+							|| !registerForm.controls['first_name'].errors?.required">
+						  This field is required
+							</p>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+										<input type="number" formControlName="phone" id="phone" class="form-control input-sm" placeholder="Phone number">
+										<p class="text-danger"
+										[hidden]="registerForm.controls['phone'].untouched 
+										|| !registerForm.controls['phone'].errors?.required">
+									  This field is required
+										</p>
+										<p class="text-danger" [hidden]="!registerForm.get('phone').hasError('pattern')">
+											
+											You should write only numbers
+										</p>
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="form-group">
+								<input type="email" formControlName="email" id="email" class="form-control input-sm" placeholder="Email Address">
+								<p
+								class="text-danger"
+								[hidden]="registerForm.controls['email'].untouched 
+								|| !registerForm.controls['email'].errors?.required">
+									  This field is required
+							</p>
+							<div *ngIf="registeredUser" class="text-danger">
+								You can't go on becouse your email already beezy
+							</div>
+							<p
+       							 class="text-danger"
+								[hidden]="!registerForm.get('email').hasError('pattern')">
+									You should use real email 
+							</p>
+			    			</div>
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+										<input type="password" formControlName="password" id="password" class="form-control input-sm" placeholder="Password">
+										<p
+										class="text-danger"
+										[hidden]="registerForm.controls['password'].untouched 
+										|| !registerForm.controls['password'].errors?.required">
+											  This field is required
+									</p>
+									<p
+									class="text-danger"
+									[hidden]="!registerForm.get('password').hasError('minlength')"
+								  >
+									The min length of field should be more than 7
+								  </p>
+								  <p
+									class="text-danger"
+									[hidden]="!registerForm.get('password').hasError('maxlength')"
+								  >
+									The max length of field should be less than 16
+								  </p>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+										<input type="password" formControlName="passConf" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+										<div *ngIf="secondPassword" class="text-danger">Your confirm password is not right</div>
+			    					</div>
+			    				</div>
+			    			</div>
+			    			
+			    			<input type="button"  [disabled]="registerForm.invalid" (click)="registerUser()" value="Register" class="btn btn-info btn-block">
+			    		
+			    		</form>
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>

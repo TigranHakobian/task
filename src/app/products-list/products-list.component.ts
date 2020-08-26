@@ -1,7 +1,9 @@
 import { Product } from './../core/models/products';
 import { Component, OnInit, Input, OnChanges, DoCheck } from '@angular/core';
-import{ FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms' 
-import { from } from 'rxjs';
+import{ FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms' ;
+import{ProductsService} from '../core/services/products.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-products-list',
@@ -15,9 +17,13 @@ export class ProductsListComponent implements OnInit {
   public sortChange: Product[] = [];
   public isLoading: boolean = true;
 
+  public selectedValue;
+
   public editTitle: string;
+
   public editDescription: string;
-  public editPrice: number;
+
+    public editPrice: number;
 
   public products: Product[] = [];
   @Input()
@@ -27,42 +33,27 @@ export class ProductsListComponent implements OnInit {
 
   public editForm :FormGroup;
 
+
+
  
 
 
-  constructor(private fb : FormBuilder) {}
+  constructor(private fb : FormBuilder, private productsService:ProductsService,public router: Router) {}
 
   ngOnInit(): void {
     setTimeout(() => {
       this.getAllProducts();
     }, 1500);
-   
+    
   }
 
   public getAllProducts(): void {
-    this.chachProducts = this.products = [
-      new Product(
-        1,
-        'Nikon',
-        'Nikon is perhaps most well known for its reputation as a world leader in imaging products,',
-        1500,
-        'https://www.primalucelab.com/media/catalog/product/cache/4/image/1000x/17f82f742ffe127f42dca9de82fb58b1/n/i/nikon_reflex_digitale_d5600a.jpg'
-      ),
-      new Product(
-        2,
-        'Canon',
-        'Canon EOS (Electro-Optical System) is an autofocus single-lens reflex camera (SLR)',
-        120,
-        'https://mimelon.com/uploads/catalog/Product//x19.jpg'
-      ),
-      new Product(
-        3,
-        'Sony',
-        'Sony also has a good but not as well known line of APS-C mirrorless cameras',
-        780,
-        'https://www.dpreview.com/files/p/E~products/sony_a7s/shots/977781aa771d42bb9db348c176542e02.png'
-      )
-    ];
+    this.productsService.getJson()
+    .subscribe((response)=>{
+      this.products = this.chachProducts = response.products
+    },(error)=>{
+      console.log(error)
+    })
     this.isLoading = false;
   }
 
@@ -115,7 +106,7 @@ export class ProductsListComponent implements OnInit {
 
   public searchresalt(searchText: string): void {
     this.isLoading = true;
-    setTimeout(() => {
+    setTimeout(() => {   
       this.products = this.chachProducts.filter((product: Product) => {
         return product.title
           .toLowerCase()
@@ -125,27 +116,41 @@ export class ProductsListComponent implements OnInit {
     }, 1200);
   }
 
+  public getCategory(selectedValue: string): void {
+    this.products = this.chachProducts;
+    this.isLoading = true;
+    setTimeout(() => {
+      this.products = this.chachProducts.filter((item)=> item.category === this.selectedValue);
+      this.router.navigateByUrl(`/home?category=${selectedValue}`); 
+      this.isLoading = false;
+    }, 1200);
+  }
+  
+  
+
   public toSort(sortChange: string): void {
+    // this.searchresalt("on");
+    this.products = this.chachProducts;
     this.isLoading = true;
     setTimeout(() => {
       switch (this.sorts) {
         case 'expensive':
-          this.products = this.chachProducts.sort(function(a, b) {
+          this.products.sort(function(a, b) {
             return b.price - a.price;
           });
           break;
         case 'cheap':
-          this.products = this.chachProducts.sort(function(a, b) {
+          this.products.sort(function(a, b) {
             return a.price - b.price;
           });
           break;
         case 'start':
-          this.products = this.chachProducts.sort(function(a, b) {
+          this.products.sort(function(a, b) {
             return a.title.localeCompare(b.title);
           });
           break;
         case 'finsh':
-          this.products = this.chachProducts.sort(function(a, b) {
+          this.products.sort(function(a, b) {
             return b.title.localeCompare(a.title);
           });
           break;

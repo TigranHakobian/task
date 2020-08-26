@@ -16,6 +16,8 @@ export class ProductRowComponent {
   @Output()
   public productForEdit: EventEmitter<any> = new EventEmitter();
 
+  public namsArr : string[]= ["E19", "B12", "A3"]
+
   constructor() {}
 
   public showProduct(): void {

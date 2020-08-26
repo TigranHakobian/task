@@ -7,8 +7,7 @@
         [(ngModel)]="currentInput"
         (change)="onFileSelected($event)"
         class="custom-file-input"
-        id="customFile"
-      />
+        id="customFile"/>
     </div>
 
     <form class="form-inline my-2 my-lg-0">
@@ -48,6 +47,24 @@
         <option value="start">A-Z</option>
         <option value="finsh">Z-A</option>
       </select>
+
+      <div class="col-xs-12 p-3">
+        <span>Find Category-> </span>
+        <select
+        name=""
+        id=""
+        class=""
+        [(ngModel)]="selectedValue"
+        (ngModelChange)="getCategory($event)"
+        [ngModelOptions]="{ standalone: true }"
+        class="mdb-select md-form"
+        >
+        <option value="" disabled selected>Choose your option</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        </select>
+        </div>
     </form>
 
     <div *ngIf="isLoading; else productList">
@@ -73,17 +90,15 @@
       </div>
     </ng-template>
   </div>
-
   <div [formGroup]='editForm' id="edit" *ngIf="!isObjectEmpty(editableProduct)">
     <div class="card mb-3 center" style="max-width: 640px;" class="maln">
       <div class="row no-gutters">
         <div class="col-xs-12">
           <div class="card-body">
             <h5 class="card-title">Update the item</h5>
-
             <p class="card-text">
               <label for="title">Title</label>
-              <input type="text" id="title" formControlName="editTitle" /> <br>
+              <input type="text" id="title" formControlName="editTitle"/> <br>
               <span class="text-danger" [hidden]="editForm.controls['editTitle'].untouched ||  !editForm.controls['editTitle'].errors?.required">
                 field is required
               </span>

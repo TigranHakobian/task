@@ -1,0 +1,69 @@
+{
+    "products":[
+        {
+             "id":1,
+        "title":"Nikon",
+        "description":"Nikon is perhaps most well known for its reputation as a world leader in imaging products",
+        "category":"B",
+       "price": 1590,
+        "imageUrl": "https://www.primalucelab.com/media/catalog/product/cache/4/image/1000x/17f82f742ffe127f42dca9de82fb58b1/n/i/nikon_reflex_digitale_d5600a.jpg"
+        },
+        {
+            "id":2,
+            "title":"Canon",
+            "description":"Canon EOS (Electro-Optical System) is an autofocus single-lens reflex camera (SLR)",
+           "price": 1690,
+           "category":"A",
+            "imageUrl": "https://mimelon.com/uploads/catalog/Product//x19.jpg"
+         },
+         {
+            "id":3,
+            "title":"Sony",
+            "description":"Sony also has a good but not as well known line of APS-C mirrorless cameras",
+           "category":"C",
+           "price": 1190,
+            "imageUrl": "https://www.dpreview.com/files/p/E~products/sony_a7s/shots/977781aa771d42bb9db348c176542e02.png"
+         },
+         {
+            "id":4,
+            "title":"Canon",
+            "description":"Canon EOS 1300D DSLR Camera (EF-S 18-55 IS II + 55-250 IS II) price in India starts from ₹35,182.",
+           "category":"A",
+           "price": 2690,
+            "imageUrl": "https://cdn1.smartprix.com/rx-iyvkleSmt-w240-h290/canon-eos-1300d-dslr.webp"
+         },
+         {
+            "id":5,
+            "title":"Sony",
+            "description":"Sony Cyber-shot DSC-W180 Digital Camera",
+           "category":"C",
+           "price": 90,
+            "imageUrl": "https://cdn1.smartprix.com/rx-iO7TpP7Kv-w240-h290/sony-cyber-shot-dsc.webp"
+         },
+         {
+            "id":6,
+            "title":"GoPro",
+            "description":"GoPro Hero (2018) 10MP Sports & Action Camera price in India starts from ₹14,999.",
+           "category":"B",
+           "price": 1290,
+            "imageUrl": "https://cdn1.smartprix.com/rx-isHebOn0F-w240-h290/gopro-hero-2018-10mp.webp"
+         }
+        
+    ],
+    "users":[
+        {
+            "id" : 1,
+            "name": "Tigran",
+            "login": "tigranhakobian99@gmail.com",
+            "password": "parol",
+            "phone": 37494314221
+        },
+        {
+         "id" : 2,
+         "name": "Ani",
+         "login": "anihayrapetyan@gmail.com",
+         "password": "ani_1888",
+         "phone": 37494328789
+     }
+    ]
+}
