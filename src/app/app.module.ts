@@ -12,8 +12,6 @@ import { BorderedBoxDirective } from './directives/bordered-box.directive';
 import { BlockCopyPasteDirective } from './shared/directives/block-copy-paste.directive';
 import { TostringPipe } from './shared/pipes/tostring.pipe';
 import { HomeComponentComponent } from './shared/home-component/home-component.component';
-import { AboutComponentComponent } from './shared/about-component/about-component.component';
-import { ContactComponentComponent } from './shared/contact-component/contact-component.component';
 import { NotFoundComponentComponent } from './shared/not-found-component/not-found-component.component';
 import { LoginComponent } from './shared/login/login.component';
 import { RegisterComponent } from './shared/register/register.component';
@@ -22,12 +20,13 @@ import { ForgetPasswordComponent } from './shared/forget-password/forget-passwor
 
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {path:'home', component: HomeComponentComponent},
-  {path:'about', component: AboutComponentComponent},
-  {path:'contact', component: ContactComponentComponent},
-  {path:'fotgetPassword', component: ForgetPasswordComponent},
+  {path:'about',loadChildren: ()=> import('./shared/about-component/about-component.module').then(m => m.AboutComponentModule)},
+  {path:'contact',loadChildren: ()=> import('./shared/contact-component/contact-component.module').then(m => m.ContactComponentModule)},
+  {path:'forgetPassword', component: ForgetPasswordComponent},
   {path:'**', component: NotFoundComponentComponent}
 ]
 
@@ -42,8 +41,6 @@ const appRoutes: Routes = [
     BlockCopyPasteDirective,
     TostringPipe,
     HomeComponentComponent,
-    AboutComponentComponent,
-    ContactComponentComponent,
     NotFoundComponentComponent,
     LoginComponent,
     RegisterComponent,
