@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CheckTokenGuard implements CanActivate {
+export class LogGGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const token:any = localStorage.getItem("token")
-       return !!token;
+      const token:any = localStorage.getItem("log")
+      return !!token;
   }
   
 }

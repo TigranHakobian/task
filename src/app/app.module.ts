@@ -12,7 +12,7 @@ import { BlockCopyPasteDirective } from './shared/directives/block-copy-paste.di
 import { HttpClientModule } from '@angular/common/http';
 // RegisterModule
 const appRoutes: Routes = [
-{ path: '', redirectTo: 'home', pathMatch: 'full' },
+{ path: '', redirectTo: 'register', pathMatch: 'full' },
 {
 path: 'login',
 loadChildren: () =>

@@ -1,3 +1,4 @@
+import { LogGGuard } from './logG/log-g.guard';
 import { LoginRoutingModule } from './login-component-routing';
 import { LoginComponent } from './login.component';
 import { RouterModule } from '@angular/router';
@@ -14,5 +15,6 @@ ReactiveFormsModule,
 RouterModule,
 LoginRoutingModule,
 ],
+providers:[LogGGuard]
 })
 export class LoginModule {}

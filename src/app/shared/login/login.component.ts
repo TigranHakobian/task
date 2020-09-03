@@ -37,7 +37,10 @@ export class LoginComponent implements OnInit {
 
    if(foundUser){
       if(foundUser.password === password){
-        if(foundUser.login === login){    
+        if(foundUser.login === login){   
+          localStorage.removeItem('reg');
+          localStorage.removeItem('log');
+          localStorage.setItem("home","somevalue")
         this.router.navigateByUrl("/home")
       }
       }

@@ -45,7 +45,11 @@ if(find){
       if(password === passConf){
          this.users.push(newUser)
           console.log(this.users);
+           localStorage.setItem("home","somevalue")
            this.router.navigateByUrl("/home")
+          localStorage.removeItem('reg');
+          localStorage.removeItem('log');
+
        }else{
         this.secondPassword = true
       }
@@ -66,6 +70,7 @@ if(find){
   }
 
   ngOnInit(): void {
+    localStorage.setItem("reg","s")
      this.registerForm = this.fb.group({
       first_name: new FormControl(
         '', 

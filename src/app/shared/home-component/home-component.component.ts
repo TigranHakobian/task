@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponentComponent implements OnInit {
 
-  constructor() { }
+  constructor( public router:Router) { 
+
+  }
 
   ngOnInit(): void {
   }
+
+  public logout(){
+    localStorage.setItem("reg","s")
+    localStorage.setItem("log","s")
+    localStorage.removeItem('home');
+    this.router.navigateByUrl("/register")
+  }
+
+  
 
 }

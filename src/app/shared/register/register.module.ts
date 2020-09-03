@@ -1,3 +1,4 @@
+import { RegGGuard } from './regGuard/reg-g.guard';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { RouterModule } from '@angular/router';
@@ -14,6 +15,7 @@ ReactiveFormsModule,
 RouterModule,
 RegisterRoutingModule
 ],
+providers:[RegGGuard],
 })
 export class RegisterModule {
 

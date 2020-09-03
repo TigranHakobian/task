@@ -1,3 +1,4 @@
+import { HomeGGuard } from './guard/home-g.guard';
 import { TostringPipe } from './../pipes/tostring.pipe';
 import { ProductsListComponent } from './../../products-list/products-list.component';
 import { homeRoutingModule } from './home-routing.module';
@@ -25,6 +26,7 @@ homeRoutingModule,
 exports:[
 TostringPipe
 ],
+providers:[HomeGGuard],
 bootstrap: [HomeComponentComponent],
 })
 export class HomeModule {}
